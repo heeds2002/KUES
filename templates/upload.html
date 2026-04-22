@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload - Kabianga University</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Kabianga University Examiner System</h1>
+    <p>Upload Assignment / CAT</p>
+</header>
+
+<div class="container">
+
+    <h2>Upload File</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+            <p>Select a file to upload</p>
+
+            <input type="file" name="file" required>
+
+            <br><br>
+
+            <button type="submit" class="btn">Upload & Analyze</button>
+        </div>
+
+    </form>
+
+    <p>Supported formats: PNG, JPG, PDF, DOCX</p>
+
+</div>
+
+</body>
+</html>

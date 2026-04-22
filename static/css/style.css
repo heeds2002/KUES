@@ -1,0 +1,114 @@
+/* ===== GENERAL ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+}
+
+/* ===== HEADER ===== */
+header {
+    background-color: #004080;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    width: 70%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* ===== CARD ===== */
+.card {
+    text-align: center;
+    padding: 30px;
+}
+
+.card h2 {
+    color: #004080;
+}
+
+.card p {
+    color: #555;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #004080;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #003060;
+}
+
+/* ===== UPLOAD BOX ===== */
+.upload-box {
+    border: 2px dashed #004080;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    margin-top: 15px;
+}
+
+/* ===== RESULT BOX ===== */
+.result-box {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ai {
+    background-color: #ffcccc;
+    color: #990000;
+}
+
+.human {
+    background-color: #ccffcc;
+    color: #006600;
+}
+
+/* ===== TEXT DISPLAY ===== */
+.text-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: #fafafa;
+    white-space: pre-wrap;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #ddd;
+    font-size: 13px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results - Kabianga University</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Kabianga University Examiner System</h1>
+    <p>Analysis Results</p>
+</header>
+
+<div class="container">
+
+    <h2>AI Detection Result</h2>
+
+    {% if "AI Generated" in ai_result %}
+        <div class="result-box ai">
+            {{ ai_result }}
+        </div>
+    {% else %}
+        <div class="result-box human">
+            {{ ai_result }}
+        </div>
+    {% endif %}
+
+    <h2>Extracted Text</h2>
+
+    <div class="text-box">
+        {{ extracted_text }}
+    </div>
+
+    <a href="/upload" class="btn">Analyze Another File</a>
+
+</div>
+
+</body>
+</html>
