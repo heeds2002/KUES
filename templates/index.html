@@ -2,30 +2,172 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kabianga University Examiner System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>KUES Dashboard</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
-<header>
-    <h1>Kabianga University Examiner System</h1>
-    <p>AI Detection in Takeaway & Assignment CATs</p>
-</header>
+<!-- HERO SECTION -->
 
-<div class="container">
-    <div class="card">
-        <h2>Welcome Examiner</h2>
+<div class="hero">
+
+    <div class="hero-content">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             class="logo"
+             alt="Kabianga University Logo">
+
+        <h1>
+            Kabianga University Examiner System
+        </h1>
+
         <p>
-            Upload student assignments, CATs, and documents for analysis.
-            Supports handwritten and computer-written work with AI detection.
+            AI Detection, OCR Analysis,
+            Marks and Report Management
+            for Take-away and Assignment CATs
         </p>
 
-        <a href="/upload" class="btn">Upload Assignment</a>
+        <br>
+
+        <a href="/upload" class="btn">
+            Start CAT Upload and Analysis
+        </a>
+
     </div>
+
 </div>
 
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Welcome to KUES</h2>
+
+        <p>
+            This intelligent university examiner platform helps lecturers
+            and examiners analyze student CATs and assignments using
+            Artificial Intelligence detection, OCR extraction, suspicious
+            phrase analysis, records management, and automated marks
+            computation.
+        </p>
+
+        <br>
+
+        <div style="
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        ">
+
+            <a href="/upload" class="btn">
+                Upload & Analyze
+            </a>
+
+            <a href="/records" class="btn">
+                View Records
+            </a>
+
+            <a href="/logout" class="btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURES -->
+
+    <div class="card">
+
+        <h2>System Features</h2>
+
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        ">
+
+            <div class="feature-box">
+                <h3>AI Detection</h3>
+
+                <p>
+                    Detects AI-generated student submissions
+                    using machine learning and hybrid analysis.
+                </p>
+            </div>
+
+            <div class="feature-box">
+                <h3>OCR Extraction</h3>
+
+                <p>
+                    Extracts handwritten and image-based text
+                    using EasyOCR and Tesseract OCR.
+                </p>
+            </div>
+
+            <div class="feature-box">
+                <h3>CAT Management</h3>
+
+                <p>
+                    Supports CAT 1 and CAT 2 uploads,
+                    marks recording, and total computation.
+                </p>
+            </div>
+
+            <div class="feature-box">
+                <h3>Records Dashboard</h3>
+
+                <p>
+                    Saves analysis results and student marks
+                    inside a centralized examiner records system.
+                </p>
+            </div>
+
+            <div class="feature-box">
+                <h3>Multiple Page Uploads</h3>
+
+                <p>
+                    Upload many handwritten pages and scanned
+                    documents for combined AI analysis.
+                </p>
+            </div>
+
+            <div class="feature-box">
+                <h3>Explainable Results</h3>
+
+                <p>
+                    Highlights suspicious phrases and explains
+                    factors increasing AI probability.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
 <footer>
-    © 2026 Kabianga University Examiner System
+
+    <p>
+        &copy; 2026 Kabianga University Examiner System |
+        AI Detection, Marks and Report Management
+    </p>
+
 </footer>
 
 </body>

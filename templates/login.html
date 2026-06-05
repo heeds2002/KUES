@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KUES Login</title>
+    <link rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+   
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Kabianga University Logo">
+   
+    <h1>Kabianga University Examiner System</h1>
+    <p>Secure Examiner Login Portal</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Examiner Login</h2>
+        <p>Enter your credentials to access the AI detection dashboard.</p>
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Enter username" required>
+
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <p style="margin-top: 20px;">
+            Do not have an account?
+            <a href="/register" style="color: #38bdf8;">Create Account</a>
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Kabianga University Examiner System | Secure Access</p>
+</footer>
+
+</body>
+</html>

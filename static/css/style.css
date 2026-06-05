@@ -1,114 +1,409 @@
-/* ===== GENERAL ===== */
-body {
-    font-family: Arial, sans-serif;
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+* {
     margin: 0;
-    background-color: #f4f6f8;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* ===== HEADER ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to right, #0f172a, #1e293b);
+    color: #f1f5f9;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header {
-    background-color: #004080;
-    color: white;
-    padding: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 25px;
     text-align: center;
+    border-bottom: 3px solid #38bdf8;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 header h1 {
-    margin: 0;
+    font-size: 32px;
+    color: #38bdf8;
+    margin-bottom: 8px;
 }
 
 header p {
-    margin-top: 5px;
-    font-size: 14px;
+    color: #cbd5e1;
+    font-size: 15px;
 }
 
-/* ===== CONTAINER ===== */
+/* =========================
+   MAIN CONTAINER
+========================= */
+
 .container {
-    width: 70%;
+    width: 90%;
+    max-width: 1100px;
     margin: 40px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background: rgba(30, 41, 59, 0.95);
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
 }
 
-/* ===== CARD ===== */
+/* =========================
+   CARD
+========================= */
+
 .card {
-    text-align: center;
+    background: #1e293b;
     padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
 }
 
-.card h2 {
-    color: #004080;
+.card h2,
+.card h3 {
+    color: #38bdf8;
+    margin-bottom: 15px;
 }
 
 .card p {
-    color: #555;
+    color: #cbd5e1;
 }
 
-/* ===== BUTTON ===== */
+/* =========================
+   BUTTONS
+========================= */
+
 .btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #004080;
+    padding: 12px 28px;
+    background: linear-gradient(to right, #0ea5e9, #2563eb);
     color: white;
     text-decoration: none;
-    border-radius: 5px;
     border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #003060;
-}
-
-/* ===== UPLOAD BOX ===== */
-.upload-box {
-    border: 2px dashed #004080;
-    padding: 40px;
-    text-align: center;
     border-radius: 10px;
-}
-
-input[type="file"] {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s ease;
     margin-top: 15px;
 }
 
-/* ===== RESULT BOX ===== */
+.btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(to right, #0284c7, #1d4ed8);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* =========================
+   FORM INPUTS
+========================= */
+
+input[type="file"],
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+/* =========================
+   UPLOAD BOX
+========================= */
+
+.upload-box {
+    border: 2px dashed #38bdf8;
+    padding: 45px;
+    text-align: center;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.7);
+    transition: 0.3s ease;
+}
+
+.upload-box:hover {
+    background: rgba(15, 23, 42, 0.9);
+    transform: scale(1.01);
+}
+
+/* =========================
+   RESULT BOXES
+========================= */
+
 .result-box {
-    padding: 15px;
-    border-radius: 8px;
+    padding: 18px;
+    border-radius: 12px;
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+    text-align: center;
 }
 
 .ai {
-    background-color: #ffcccc;
-    color: #990000;
+    background: rgba(127, 29, 29, 0.3);
+    border-left: 5px solid #ef4444;
+    color: #fecaca;
 }
 
 .human {
-    background-color: #ccffcc;
-    color: #006600;
+    background: rgba(20, 83, 45, 0.3);
+    border-left: 5px solid #22c55e;
+    color: #bbf7d0;
 }
 
-/* ===== TEXT DISPLAY ===== */
+/* =========================
+   TEXT DISPLAY
+========================= */
+
 .text-box {
-    border: 1px solid #ddd;
-    padding: 15px;
-    height: 300px;
-    overflow-y: scroll;
-    background-color: #fafafa;
+    border: 1px solid #334155;
+    padding: 18px;
+    max-height: 350px;
+    overflow-y: auto;
+    background: #0f172a;
+    border-radius: 12px;
     white-space: pre-wrap;
+    color: #f8fafc;
+    margin-top: 15px;
 }
 
-/* ===== FOOTER ===== */
+/* =========================
+   FEATURE / ANALYSIS BOX
+========================= */
+
+.feature-box {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid #334155;
+}
+
+.feature-box h3,
+.feature-box h4 {
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+.feature-box p,
+.feature-box li {
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
+
+/* =========================
+   HIGHLIGHTED AI TEXT
+========================= */
+
+.highlight-ai {
+
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.25),
+        rgba(255, 80, 80, 0.35)
+    );
+
+    color: #ff1e1e;
+
+    font-weight: bold;
+
+    padding: 3px 6px;
+
+    border-radius: 6px;
+
+    border: 1px solid rgba(255, 0, 0, 0.4);
+
+    box-shadow:
+        0 0 8px rgba(255, 0, 0, 0.35);
+
+    animation: pulseAI 1.8s infinite;
+}
+@keyframes pulseAI {
+
+    0% {
+        box-shadow:
+            0 0 5px rgba(255, 0, 0, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 16px rgba(255, 0, 0, 0.6);
+    }
+
+    100% {
+        box-shadow:
+            0 0 5px rgba(255, 0, 0, 0.2);
+    }
+}
+
+
+.ai-label {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    background: #dc2626;
+    border-radius: 10px;
+}
+/* =========================
+   LOADING BAR
+========================= */
+
+#loadingBox {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#loadingPercent {
+    margin: 15px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+#loadingBar {
+    transition: width 0.3s ease;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #334155;
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background: #1e293b;
+    color: #38bdf8;
+}
+
+table tr:nth-child(even) {
+    background: rgba(255,255,255,0.03);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
     text-align: center;
+    padding: 20px;
     margin-top: 40px;
-    padding: 15px;
-    background-color: #ddd;
-    font-size: 13px;
+    background: rgba(15, 23, 42, 0.95);
+    color: #94a3b8;
+    border-top: 2px solid #38bdf8;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0ea5e9;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+
+    filter: drop-shadow(
+        0 0 10px rgba(56, 189, 248, 0.5)
+    );
+}
+
+.hero {
+    position: relative;
+
+    height: 60vh;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("../images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: white;
+
+    border-bottom: 2px solid rgba(56, 189, 248, 0.4);
+
+    box-shadow:
+        0 0 25px rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 15px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #dbeafe;
+
+    line-height: 1.8;
 }

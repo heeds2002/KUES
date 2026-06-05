@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KUES Admin Panel</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         class="logo"
+         alt="Kabianga University Logo">
+
+    <h1>KUES System Administrator</h1>
+    <p>Manage Users, Records and System Data</p>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Registered Users</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[3] }}</td>
+                <td>
+                    <a href="/edit_user/{{ user[0] }}" class="btn">
+                        Edit
+                    </a>
+
+                    {% if user[1] != "admin" %}
+                    <a href="/delete_user/{{ user[0] }}"
+                       class="btn"
+                       onclick="return confirm('Delete this user?');">
+                        Delete
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>System Records</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>File</th>
+                <th>Tested Record</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[8] }}</td>
+                <td>
+                    <a href="/delete_record/{{ record[0] }}"
+                       class="btn"
+                       onclick="return confirm('Delete this record?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="/" class="btn">Examiner Dashboard</a>
+    <a href="/records" class="btn">Records Page</a>
+    <a href="/logout" class="btn">Logout</a>
+
+</div>
+
+<footer>
+    <p>
+        &copy; 2026 Kabianga University Examiner System |
+        Administrator Panel
+    </p>
+</footer>
+
+</body>
+</html>

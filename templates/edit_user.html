@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         class="logo"
+         alt="Kabianga University Logo">
+
+    <h1>Edit User Account</h1>
+    <p>System Administrator Control</p>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Edit User</h2>
+
+        <form method="POST">
+
+            <label>Username</label>
+            <input type="text"
+                   name="username"
+                   value="{{ user[1] }}"
+                   required>
+
+            <label>Password</label>
+            <input type="text"
+                   name="password"
+                   value="{{ user[2] }}"
+                   required>
+
+            <label>Role</label>
+            <select name="role" required>
+                <option value="admin" {% if user[3] == "admin" %}selected{% endif %}>
+                    Admin
+                </option>
+
+                <option value="examiner" {% if user[3] == "examiner" %}selected{% endif %}>
+                    Examiner
+                </option>
+            </select>
+
+            <button type="submit" class="btn">
+                Save Changes
+            </button>
+
+        </form>
+
+        <a href="/admin" class="btn">
+            Back to Admin Panel
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

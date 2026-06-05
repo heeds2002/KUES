@@ -1,40 +1,535 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Results - Kabianga University</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>KUES Analysis Result</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
 <header>
+
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         class="logo"
+         alt="Kabianga University Logo">
+
     <h1>Kabianga University Examiner System</h1>
-    <p>Analysis Results</p>
+
+    <p>AI Detection Analysis Result</p>
+
 </header>
 
 <div class="container">
 
-    <h2>AI Detection Result</h2>
+    <!-- FINAL RESULT -->
 
-    {% if "AI Generated" in ai_result %}
-        <div class="result-box ai">
-            {{ ai_result }}
-        </div>
-    {% else %}
-        <div class="result-box human">
-            {{ ai_result }}
-        </div>
-    {% endif %}
+    <div class="result-box {% if ai_score > human_score %}ai{% else %}human{% endif %}">
 
-    <h2>Extracted Text</h2>
+        <h2>{{ ai_result }}</h2>
 
-    <div class="text-box">
-        {{ extracted_text }}
     </div>
 
-    <a href="/upload" class="btn">Analyze Another File</a>
+    <!-- SCORE DETAILS -->
+
+    <div class="card">
+
+        <h2>Detection Scores</h2>
+
+        <div class="feature-box">
+
+            <p>
+                <strong>Original ML Score:</strong>
+                {{ original_ml_score | round(2) }}%
+            </p>
+
+            <p>
+                <strong>Final Hybrid AI Score:</strong>
+                {{ ai_score | round(2) }}%
+            </p>
+
+            <p>
+                <strong>Human Score:</strong>
+                {{ human_score | round(2) }}%
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- GAUGES -->
+
+    <div class="card">
+
+        <h2>AI Probability Gauges</h2>
+
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        ">
+
+            <!-- CAT 1 -->
+
+            <div class="feature-box" style="text-align:center;">
+
+                <h3>CAT 1</h3>
+
+                <p><strong>{{ cat1_result }}</strong></p>
+
+                <p>
+                    AI Probability:
+                    {{ cat1_score | round(2) }}%
+                </p>
+
+                <div class="gauge-container">
+
+                    <canvas id="cat1Gauge"></canvas>
+
+                    <div class="center-text" id="cat1Value">
+                        {{ cat1_score | round(1) }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CAT 2 -->
+
+            {% if has_cat2 %}
+
+            <div class="feature-box" style="text-align:center;">
+
+                <h3>CAT 2</h3>
+
+                <p><strong>{{ cat2_result }}</strong></p>
+
+                <p>
+                    AI Probability:
+                    {{ cat2_score | round(2) }}%
+                </p>
+
+                <div class="gauge-container">
+
+                    <canvas id="cat2Gauge"></canvas>
+
+                    <div class="center-text" id="cat2Value">
+                        {{ cat2_score | round(1) }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+            <!-- OVERALL -->
+
+            <div class="feature-box" style="text-align:center;">
+
+                <h3>Overall Result</h3>
+
+                <p><strong>{{ ai_result }}</strong></p>
+
+                <p>
+                    AI Probability:
+                    {{ ai_score | round(2) }}%
+                </p>
+
+                <div class="gauge-container">
+
+                    <canvas id="overallGauge"></canvas>
+
+                    <div class="center-text" id="overallValue">
+                        {{ ai_score | round(1) }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURE ANALYSIS -->
+
+    <div class="card">
+
+        <h2>Writing Pattern Analysis</h2>
+
+        <div class="feature-box">
+
+            <p><strong>Sentence Count:</strong> {{ features.sentence_count }}</p>
+
+            <p><strong>Word Count:</strong> {{ features.word_count }}</p>
+
+            <p><strong>Average Sentence Length:</strong>
+                {{ features.avg_sentence_length | round(2) }}
+            </p>
+
+            <p><strong>Sentence Variation / Burstiness:</strong>
+                {{ features.sentence_variance | round(2) }}
+            </p>
+
+            <p><strong>Vocabulary Diversity:</strong>
+                {{ features.vocab_diversity | round(2) }}
+            </p>
+
+            <p><strong>Spelling Errors:</strong>
+                {{ features.spelling_errors }}
+            </p>
+
+            <p><strong>Error Rate:</strong>
+                {{ (features.error_rate * 100) | round(2) }}%
+            </p>
+
+            <hr>
+
+            <p><strong>AI Phrase Count:</strong>
+                {{ features.ai_phrase_count }}
+            </p>
+
+            <p><strong>Quote Count:</strong>
+                {{ features.quote_count }}
+            </p>
+
+            <p><strong>Dash Count:</strong>
+                {{ features.dash_count }}
+            </p>
+
+            <p><strong>Parenthesis Count:</strong>
+                {{ features.parenthesis_count }}
+            </p>
+
+            <p><strong>Colon Count:</strong>
+                {{ features.colon_count }}
+            </p>
+
+            <p><strong>Comma Count:</strong>
+                {{ features.comma_count }}
+            </p>
+
+            <p><strong>Full Stop Count:</strong>
+                {{ features.fullstop_count }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- REASONS -->
+
+    <div class="card">
+
+        <h2>Reason for Detection</h2>
+
+        <div class="feature-box">
+
+            <ul>
+
+                {% for reason in reasons %}
+                    <li>{{ reason }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- BREAKDOWN -->
+
+    <div class="card">
+
+        <h2>Suspicion Level Breakdown</h2>
+
+        <div class="feature-box">
+
+            <h3>Features Increasing AI Probability</h3>
+
+            <ul>
+
+                {% for item in breakdown.increased %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+
+            </ul>
+
+            <hr>
+
+            <h3>Features Reducing AI Probability</h3>
+
+            <ul>
+
+                {% for item in breakdown.reduced %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- FILTERED ANSWER -->
+
+    <div class="card">
+
+        <h2>Answer Text Used for Testing</h2>
+
+        <p>
+            Suspicious AI-like phrases are highlighted in red.
+        </p>
+
+        <div class="text-box">
+
+            {{ highlighted_text | safe }}
+
+        </div>
+
+    </div>
+
+    <!-- FULL TEXT -->
+
+    <div class="card">
+
+        <h2>Full Extracted Text</h2>
+
+        <div class="text-box">
+
+            <pre>{{ extracted_text }}</pre>
+
+        </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div style="
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    ">
+
+        <a href="/" class="btn">
+            Analyze Another Document
+        </a>
+
+        <a href="/records" class="btn">
+            View Saved Records
+        </a>
+
+        <a href="/download_report" class="btn">
+            Download Word Report
+        </a>
+
+    </div>
 
 </div>
+
+<footer>
+
+    <p>
+        &copy; 2026 Kabianga University Examiner System |
+        AI Detection, Marks and Report Management
+    </p>
+
+</footer>
+
+<script>
+
+function getScoreColor(score) {
+
+    if (score <= 20) return "#004d00";
+    else if (score <= 40) return "#00cc66";
+    else if (score <= 60) return "#ffff00";
+    else if (score <= 80) return "#ff6600";
+    else return "#8b0000";
+
+}
+
+function createGauge(canvasId, valueId, score) {
+
+    let displayedScore = 0;
+
+    const canvas = document.getElementById(canvasId);
+    const valueBox = document.getElementById(valueId);
+
+    if (!canvas || !valueBox) return;
+
+    const ctx = canvas.getContext("2d");
+
+    valueBox.style.color = getScoreColor(score);
+
+    function getGradient(ctx) {
+
+        const gradient = ctx.createLinearGradient(0, 0, 300, 0);
+
+        gradient.addColorStop(0, "#004d00");
+        gradient.addColorStop(0.25, "#00cc66");
+        gradient.addColorStop(0.5, "#ffff00");
+        gradient.addColorStop(0.75, "#ff6600");
+        gradient.addColorStop(1, "#8b0000");
+
+        return gradient;
+    }
+
+    const gaugeChart = new Chart(ctx, {
+
+        type: "doughnut",
+
+        data: {
+            datasets: [{
+                data: [100],
+                backgroundColor: [getGradient(ctx)],
+                borderWidth: 0
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            rotation: -90,
+
+            circumference: 180,
+
+            cutout: "75%",
+
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            }
+
+        },
+
+        plugins: [{
+
+            id: "needle_" + canvasId,
+
+            afterDraw(chart) {
+
+                const ctx = chart.ctx;
+                const width = chart.width;
+                const height = chart.height;
+
+                const angle = Math.PI * (displayedScore / 100);
+
+                const cx = width / 2;
+                const cy = height * 0.9;
+
+                const needleLength = height * 0.82;
+
+                ctx.save();
+
+                ctx.translate(cx, cy);
+
+                ctx.rotate(angle - Math.PI / 2);
+
+                ctx.shadowColor = "white";
+                ctx.shadowBlur = 18;
+
+                ctx.beginPath();
+
+                ctx.moveTo(0, 10);
+
+                ctx.lineTo(0, -needleLength);
+
+                ctx.lineWidth = 8;
+
+                ctx.strokeStyle = "white";
+
+                ctx.lineCap = "round";
+
+                ctx.stroke();
+
+                ctx.shadowBlur = 0;
+
+                ctx.beginPath();
+
+                ctx.arc(0, 0, 8, 0, 2 * Math.PI);
+
+                ctx.fillStyle = "white";
+
+                ctx.fill();
+
+                ctx.restore();
+
+                ctx.save();
+
+                ctx.fillStyle = "white";
+
+                ctx.font = "14px Arial";
+
+                ctx.fillText("LOW AI", 10, height - 10);
+
+                ctx.fillText("HIGH AI", width - 85, height - 10);
+
+                ctx.restore();
+
+            }
+
+        }]
+
+    });
+
+    function animateNeedle() {
+
+        if (displayedScore < score) {
+
+            displayedScore += 1;
+
+            if (displayedScore > score) {
+                displayedScore = score;
+            }
+
+            gaugeChart.update();
+
+            requestAnimationFrame(animateNeedle);
+
+        }
+
+    }
+
+    animateNeedle();
+
+}
+
+createGauge(
+    "cat1Gauge",
+    "cat1Value",
+    Number("{{ cat1_score | default(0) }}")
+);
+
+const hasCat2 = "{{ has_cat2 }}";
+
+if (hasCat2 === "True") {
+
+    createGauge(
+        "cat2Gauge",
+        "cat2Value",
+        Number("{{ cat2_score | default(0) }}")
+    );
+
+}
+
+createGauge(
+    "overallGauge",
+    "overallValue",
+    Number("{{ ai_score | default(0) }}")
+);
+
+</script>
 
 </body>
 </html>

@@ -2,37 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Upload - Kabianga University</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
 <header>
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         class="logo"
+         alt="Kabianga University Logo">
+
     <h1>Kabianga University Examiner System</h1>
-    <p>Upload Assignment / CAT</p>
+    <p>Upload CAT 1 and CAT 2 for AI Detection</p>
 </header>
 
 <div class="container">
 
-    <h2>Upload File</h2>
+    <div class="card">
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <h2>Submit Student CATs for Analysis</h2>
 
-        <div class="upload-box">
-            <p>Select a file to upload</p>
+        <p>
+            Upload CAT 1 pages first. If CAT 2 is available, upload it below.
+            The system will analyze each CAT and record AI/Human probability.
+        </p>
 
-            <input type="file" name="file" required>
+        <form id="uploadForm"
+              action="/upload"
+              method="POST"
+              enctype="multipart/form-data">
 
-            <br><br>
+            <div class="upload-box">
 
-            <button type="submit" class="btn">Upload & Analyze</button>
+                <h3>Upload CAT 1</h3>
+
+                <p>Upload one or multiple pages for CAT 1.</p>
+
+                <input type="file"
+                       name="cat1_files"
+                       multiple
+                       required>
+
+                <br><br>
+
+                <h3>Upload CAT 2 (Optional)</h3>
+
+                <p>Upload CAT 2 pages if available.</p>
+
+                <input type="file"
+                       name="cat2_files"
+                       multiple>
+
+                <br><br>
+
+                <p>
+                    Supported formats:
+                    <strong>PNG, JPG, JPEG, PDF, DOCX, TXT</strong>
+                </p>
+
+                <button type="submit" class="btn">
+                    Upload & Analyze
+                </button>
+
+            </div>
+
+        </form>
+
+        <div id="loadingBox" style="display: none;">
+
+            <h3>Analyzing Documents</h3>
+
+            <p>
+                Please wait while the system extracts text, filters answers,
+                analyzes writing patterns, and calculates AI probability.
+            </p>
+
+            <p id="loadingPercent">0%</p>
+
+            <div style="
+                width: 85%;
+                margin: 15px auto;
+                background: #0f172a;
+                border: 1px solid #38bdf8;
+                border-radius: 30px;
+                overflow: hidden;
+                box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            ">
+
+                <div id="loadingBar" style="
+                    width: 0%;
+                    height: 24px;
+                    background: linear-gradient(to right, #22c55e, #eab308, #ef4444);
+                    border-radius: 30px;
+                    transition: width 0.3s ease;
+                "></div>
+
+            </div>
+
+            <small style="color: #94a3b8;">
+                Processing speed depends on document length and handwriting clarity.
+            </small>
+
         </div>
 
-    </form>
+    </div>
 
-    <p>Supported formats: PNG, JPG, PDF, DOCX</p>
+    <div class="card">
+
+        <h3>What the System Checks</h3>
+
+        <p>✔ CAT 1 and CAT 2 document analysis</p>
+        <p>✔ Multiple-page upload support</p>
+        <p>✔ OCR text extraction</p>
+        <p>✔ Answer-only filtering</p>
+        <p>✔ AI/Human probability score</p>
+        <p>✔ Suspicious phrase highlighting</p>
+
+    </div>
+
+    <a href="/" class="btn">Back to Dashboard</a>
 
 </div>
+
+<footer>
+    <p>
+        &copy; 2026 Kabianga University Examiner System |
+        Upload & Analysis Portal
+    </p>
+</footer>
+
+<script>
+    const form = document.getElementById("uploadForm");
+    const loadingBox = document.getElementById("loadingBox");
+    const loadingPercent = document.getElementById("loadingPercent");
+    const loadingBar = document.getElementById("loadingBar");
+
+    form.addEventListener("submit", function () {
+        loadingBox.style.display = "block";
+
+        let progress = 0;
+
+        const interval = setInterval(function () {
+            if (progress < 95) {
+                progress += 1;
+                loadingPercent.innerText = progress + "%";
+                loadingBar.style.width = progress + "%";
+            } else {
+                clearInterval(interval);
+                loadingPercent.innerText = "95% - Finalizing analysis...";
+            }
+        }, 70);
+    });
+</script>
 
 </body>
 </html>

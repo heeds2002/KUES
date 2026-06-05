@@ -1,40 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Records</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>KUES Records</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
 <header>
+
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         class="logo"
+         alt="Kabianga University Logo">
+
     <h1>Kabianga University Examiner System</h1>
-    <p>Saved Results</p>
+
+    <p>Take Away Assignment and CATs Marks</p>
+
 </header>
 
 <div class="container">
 
-    <h2>All Submissions</h2>
+    <div class="card">
 
-    <table border="1" width="100%" cellpadding="10">
-        <tr>
-            <th>ID</th>
-            <th>Filename</th>
-            <th>Result</th>
-            <th>Date</th>
-        </tr>
+        <h2>Take Away Assignment and CATs Marks</h2>
 
-        {% for row in records %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-        </tr>
-        {% endfor %}
+        <p>
+            Examiner enters registration number, CAT 1 marks and CAT 2 marks manually.
+            The system records AI/Human tested results and calculates total marks automatically.
+        </p>
 
-    </table>
+        <table>
+
+            <tr>
+                <th>Student File</th>
+                <th>Registration Number</th>
+                <th>Tested Record</th>
+                <th colspan="2">Take Away and Assignment Marks</th>
+                <th>Total Marks</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>CAT 1</th>
+                <th>CAT 2</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            {% for row in records %}
+
+            <tr>
+                <form method="POST" action="/update_marks/{{ row[0] }}">
+
+                    <td>{{ row[1] }}</td>
+
+                    <td>
+                        <input type="text"
+                               name="reg_number"
+                               value="{{ row[4] if row[4] else '' }}"
+                               placeholder="Enter Reg No">
+                    </td>
+
+                    <td>{{ row[3] }}</td>
+
+                    <td>
+                        <input type="number"
+                               step="0.01"
+                               name="cat1_marks"
+                               value="{{ row[5] }}">
+                    </td>
+
+                    <td>
+                        <input type="number"
+                               step="0.01"
+                               name="cat2_marks"
+                               value="{{ row[6] }}">
+                    </td>
+
+                    <td>
+                        <strong>{{ row[7] }}</strong>
+                    </td>
+
+                    <td>
+                        <button type="submit" class="btn">
+                            Save
+                        </button>
+                    </td>
+
+                </form>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <a href="/" class="btn">
+        Back to Dashboard
+    </a>
 
 </div>
+
+<footer>
+
+    <p>
+        &copy; 2026 Kabianga University Examiner System |
+        CATs and Assignment Marks Records
+    </p>
+
+</footer>
 
 </body>
 </html>
