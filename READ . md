@@ -1,0 +1,178 @@
+# Kabianga University Examiner System (KUES)
+
+## AI Detection, Marks and Report Management for Take-Away and Assignment CATs
+
+### Project Overview
+
+The Kabianga University Examiner System (KUES) is a Flask-based web application developed to assist lecturers and examiners in analyzing student submissions for possible AI-generated content. The system combines Optical Character Recognition (OCR), Machine Learning, and explainable AI techniques to evaluate student assignments, CATs, and take-away examinations.
+
+The system supports both typed and handwritten documents and provides detailed AI probability reports together with marks and record management functionality.
+
+---
+
+## Features
+
+### AI Detection
+
+* Machine Learning based AI probability prediction
+* Hybrid AI scoring system
+* Explainable AI analysis
+* Suspicious phrase detection
+* AI phrase highlighting
+
+### OCR Processing
+
+* Handwritten text extraction
+* Image text recognition
+* PDF text extraction
+* Multi-page document support
+
+### CAT Management
+
+* CAT 1 analysis
+* CAT 2 analysis
+* Multiple file uploads
+* Combined result computation
+
+### Records Management
+
+* Student record storage
+* Marks recording
+* Total marks computation
+* Historical analysis records
+
+### Reports
+
+* Downloadable Word reports
+* AI analysis summary
+* Feature analysis breakdown
+* Detection reasoning
+
+### Administration
+
+* User registration
+* Login authentication
+* Administrator dashboard
+* User management
+* Record management
+
+---
+
+## Technologies Used
+
+* Python 3
+* Flask
+* SQLite
+* Scikit-Learn
+* Tesseract OCR
+* EasyOCR
+* HTML
+* CSS
+* JavaScript
+* Chart.js
+* Microsoft Word Report Generation
+
+---
+
+## System Modules
+
+1. Login and Authentication Module
+2. Document Upload Module
+3. OCR Processing Module
+4. AI Detection Module
+5. Marks Management Module
+6. Report Generation Module
+7. Records Management Module
+8. Administration Module
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/heeds2002/KUES.git
+```
+
+### Navigate to Project
+
+```bash
+cd KUES
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Environment
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run Application
+
+```bash
+python app.py
+```
+
+### Open Browser
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+## Default Administrator Account
+
+Username:
+
+```text
+admin
+```
+
+Password:
+
+```text
+admin123
+```
+
+---
+
+## Future Improvements
+
+* Online deployment
+* PDF report generation
+* Excel export
+* Advanced AI detection models
+* Student performance analytics
+* Departmental dashboards
+* Cloud database integration
+
+---
+
+## Author
+
+**Burtone Heeds Openo**
+
+Bachelor of Science in Computer Science
+
+University of Kabianga
+
+---
+
+## License
+
+Academic Project – University of Kabianga
